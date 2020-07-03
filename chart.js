@@ -9,7 +9,7 @@ window.chartColors = {
 };
 
 machine_name= "asraphael"
-json_file= machine_name+".json"
+json_file= "./images/"+machine_name+".json"
 $.getJSON(json_file, function(data) {
 	   var time = data.cpu.map(function(e) { return e[0];
 	   });
