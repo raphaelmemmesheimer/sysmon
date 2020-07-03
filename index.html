@@ -1,32 +1,28 @@
-<h1>System Monitor</h1>
-<h2>asraphael</h2>
+<!DOCTYPE html>
+<html lang="en">
 
-<h3>GPU Usage</h3>
-<img src='images/asraphael_gpu_usage.png'>
-<h3>CPU Usage</h3>
-<img src='images/asraphael_cpu_usage.png'>
-<h3>Memory Usage</h3>
-<img src='images/asraphael_memory_usage.png'>
-<h3>Sensor Temp</h3>
-<img src='images/asraphael_sensor_temp.png'>
 
-<h2>aserver</h2>
-<h3>GPU Usage</h3>
-<img src='images/aserver_gpu_usage.png'>
-<h3>CPU Usage</h3>
-<img src='images/aserver_cpu_usage.png'>
-<h3>Memory Usage</h3>
-<img src='images/aserver_memory_usage.png'>
-<h3>Sensor Temp</h3>
-<img src='images/aserver_sensor_temp.png'>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="./chart.js"></script>
 
-<h2>asgard</h2>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>System Monitor</title>
+</head>
+<style>
+    .container {
+        width: 50%;
+        height: 50%;
+    }
+</style>
+<body>
 
-<h3>GPU Usage</h3>
-<img src='images/asgard_gpu_usage.png'>
-<h3>CPU Usage</h3>
-<img src='images/asgard_cpu_usage.png'>
-<h3>Memory Usage</h3>
-<img src='images/asgard_memory_usage.png'>
-<h3>Sensor Temp</h3>
-<img src='images/asgard_sensor_temp.png'>
+
+<canvas id="chart_asraphael"></canvas>
+
+</body>
+
+</html>
