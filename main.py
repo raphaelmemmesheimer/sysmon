@@ -4,16 +4,18 @@ import nvgpu
 import psutil
 import socket
 import time
+import json
 
 system_stats = {"gpu":[], "cpu": [], "memory": [], "sensor": [], "disk": []}
 machine_name = socket.gethostname()
 
 def update():
-    system_stats["cpu"].append(psutil.cpu_percent()) # this gives an average
-    system_stats["memory"].append(psutil.virtual_memory())
+    time_str = time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())
+    system_stats["cpu"].append([time_str, psutil.cpu_percent()]) # this gives an average
+    system_stats["memory"].append(psutil.virtual_memory().percent)
     system_stats["gpu"].append(nvgpu.gpu_info())
-    system_stats["sensor"].append(psutil.sensors_temperatures())
-    system_stats["disk"].append(psutil.disk_partitions)
+    #system_stats["sensor"].append(psutil.sensors_temperatures())
+    #system_stats["disk"].append(psutil.disk_partitions())
 
 def generate_graphs():
     print(system_stats)
@@ -54,8 +56,14 @@ def generate_graphs():
     fig.savefig('images/%s_sensor_temp.png'%(machine_name))
     plt.close()
 
+def generate_json():
+    #print(system_stats)
+    with open('images/%s.json'%(machine_name), 'w') as f:
+        json.dump(system_stats, f)
+
 
 while True:
     update()
-    generate_graphs()
+    #generate_graphs()
+    generate_json()
     time.sleep(5)
