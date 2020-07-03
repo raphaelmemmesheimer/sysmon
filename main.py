@@ -1,9 +1,11 @@
 import pandas as pd
+import matplotlib
 import matplotlib.pyplot as plt
 import nvgpu
 import psutil
 import socket
 import time
+matplotlib.use('Agg')
 
 system_stats = {"gpu":[], "cpu": [], "memory": [], "sensor": [], "disk": []}
 machine_name = socket.gethostname()
@@ -44,15 +46,18 @@ def generate_graphs():
     fig.savefig('images/%s_memory_usage.png'%(machine_name))
     plt.close()
 
-    # Memory
-    sensor_temp = []
-    for sensor_info in system_stats["sensor"]:
-        sensor_temp.append(sensor_info["coretemp"][0].current)
-    s = pd.Series(sensor_temp)
-    fig, ax = plt.subplots()
-    s.plot.bar()
-    fig.savefig('images/%s_sensor_temp.png'%(machine_name))
-    plt.close()
+    # Sensors
+    try:
+        sensor_temp = []
+        for sensor_info in system_stats["sensor"]:
+            sensor_temp.append(sensor_info["coretemp"][0].current)
+        s = pd.Series(sensor_temp)
+        fig, ax = plt.subplots()
+        s.plot.bar()
+        fig.savefig('images/%s_sensor_temp.png'%(machine_name))
+        plt.close()
+    except:
+        print("Error")
 
 
 while True:
