@@ -6,6 +6,8 @@ import psutil
 import socket
 import time
 import json
+import hydra
+
 matplotlib.use('Agg')
 
 system_stats = {"gpu":[], "cpu": [], "memory": [], "sensor": [], "disk": []}
@@ -63,12 +65,25 @@ def generate_graphs():
 
 def generate_json():
     #print(system_stats)
-    with open('images/%s.json'%(machine_name), 'w') as f:
+    #with open('./images/%s.json'%(machine_name), 'w') as f:
+    with open('%s.json'%(machine_name), 'w') as f:
         json.dump(system_stats, f)
 
 
-while True:
-    update()
-    #generate_graphs()
-    generate_json()
-    time.sleep(5)
+
+
+@hydra.main(config_path="config/config.yaml")
+def sysmon_app(cfg):
+    print(cfg.pretty())
+
+    while True:
+        update()
+        #generate_graphs()
+        generate_json()
+        time.sleep(cfg.update_interval)
+
+
+if __name__ == "__main__":
+    sysmon_app()
+
+
