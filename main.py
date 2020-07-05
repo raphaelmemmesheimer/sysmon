@@ -64,9 +64,9 @@ def generate_graphs():
         print("Error")
 
 def generate_json():
-    #print(system_stats)
-    #with open('./images/%s.json'%(machine_name), 'w') as f:
-    with open('%s.json'%(machine_name), 'w') as f:
+    print(system_stats)
+    with open('images/%s.json'%(machine_name), 'w') as f:
+    #with open('%s.json'%(machine_name), 'w') as f:
         json.dump(system_stats, f)
 
 
