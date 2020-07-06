@@ -14,7 +14,7 @@ system_stats = {"gpu":[], "cpu": [], "memory": [], "sensor": [], "disk": []}
 machine_name = socket.gethostname()
 
 def update():
-    time_str = time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())
+    time_str = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     system_stats["cpu"].append([time_str, psutil.cpu_percent()]) # this gives an average
     system_stats["memory"].append(psutil.virtual_memory().percent)
     system_stats["gpu"].append(nvgpu.gpu_info())
