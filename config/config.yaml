@@ -1,1 +1,2 @@
-update_interval: 30
+update_interval_in_s: 30
+data_items: 1000

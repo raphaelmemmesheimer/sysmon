@@ -63,11 +63,11 @@ def generate_graphs():
     except:
         print("Error")
 
-def generate_json():
+def generate_json(data_items):
     print(system_stats)
-    with open('images/%s.json'%(machine_name), 'w') as f:
-    #with open('%s.json'%(machine_name), 'w') as f:
-        json.dump(system_stats, f)
+    #with open('images/%s.json'%(machine_name), 'w') as f:
+    with open('%s/%s/%s.json'%(hydra.utils.get_original_cwd(), "images" ,machine_name), 'w') as f:
+        json.dump(system_stats[-data_items:], f)
 
 
 
@@ -75,15 +75,12 @@ def generate_json():
 @hydra.main(config_path="config/config.yaml")
 def sysmon_app(cfg):
     print(cfg.pretty())
-
     while True:
         update()
         #generate_graphs()
-        generate_json()
-        time.sleep(cfg.update_interval)
+        generate_json(cfg.data_items)
+        time.sleep(cfg.update_interval_in_s)
 
 
 if __name__ == "__main__":
     sysmon_app()
-
-
