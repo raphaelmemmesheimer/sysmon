@@ -22,7 +22,7 @@ def update():
     #system_stats["disk"].append(psutil.disk_partitions())
 
 def generate_graphs():
-    print(system_stats)
+    #print(system_stats)
     # GPU
     gpu_mem_used = []
     for gpu_info in system_stats["gpu"]:
@@ -64,7 +64,7 @@ def generate_graphs():
         print("Error")
 
 def generate_json(data_items):
-    print(system_stats)
+    #print(system_stats)
     #with open('images/%s.json'%(machine_name), 'w') as f:
     with open('%s/%s/%s.json'%(hydra.utils.get_original_cwd(), "images" ,machine_name), 'w') as f:
         json.dump(system_stats, f)
