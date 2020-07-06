@@ -67,7 +67,7 @@ def generate_json(data_items):
     print(system_stats)
     #with open('images/%s.json'%(machine_name), 'w') as f:
     with open('%s/%s/%s.json'%(hydra.utils.get_original_cwd(), "images" ,machine_name), 'w') as f:
-        json.dump(system_stats[-data_items:], f)
+        json.dump(system_stats, f)
 
 
 
