@@ -14,5 +14,5 @@ We use it in our lab to monitor the workload of our machine learning servers.
 * `sshfs <user>@<server>:<html_dir>/sysmon/images images`
 * `python main.py`
 
-Then navigate to: `https://<server>:<html_dir>/sysmon` in your browser.
+Then navigate to: `https://<server>/<html_dir>/sysmon` in your browser.
 
