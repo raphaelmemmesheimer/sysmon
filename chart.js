@@ -116,3 +116,23 @@ $.getJSON(json_file, function(data) {
 });
 
 
+machine_name= "tesla"
+json_file= "./images/"+machine_name+".json"
+$.getJSON(json_file, function(data) {
+	   var time = data.cpu.map(function(e) { 
+		return e[0];
+	   });
+	   var cpu_data = data.cpu.map(function(e) {
+	      return e[1];
+	   });
+	
+	   var gpu_data = data.gpu.map(function(e) {
+	      return e[0].mem_used_percent;
+	   });
+	
+	   var memory_data = data.memory.map(function(e) {
+	      return e;
+	   });
+	render_chart(time, cpu_data, gpu_data, memory_data, "tesla")
+
+});
