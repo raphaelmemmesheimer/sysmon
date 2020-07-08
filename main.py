@@ -63,13 +63,16 @@ def generate_graphs():
     except:
         print("Error")
 
+
 def generate_json(data_items):
     #print(system_stats)
     #with open('images/%s.json'%(machine_name), 'w') as f:
+    filtered_stats = {}
+    for key in system_stats.keys():
+        filtered_stats[key] = system_stats[key][-data_items:]
+
     with open('%s/%s/%s.json'%(hydra.utils.get_original_cwd(), "images" ,machine_name), 'w') as f:
         json.dump(system_stats, f)
-
-
 
 
 @hydra.main(config_path="config/config.yaml")
