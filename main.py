@@ -5,8 +5,6 @@ import time
 import json
 import hydra
 
-matplotlib.use('Agg')
-
 system_stats = {"gpu":[], "cpu": [], "memory": [], "sensor": [], "disk": []}
 machine_name = socket.gethostname()
 
