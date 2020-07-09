@@ -1,6 +1,3 @@
-import pandas as pd
-import matplotlib
-import matplotlib.pyplot as plt
 import nvgpu
 import psutil
 import socket
@@ -21,48 +18,6 @@ def update():
     #system_stats["sensor"].append(psutil.sensors_temperatures())
     #system_stats["disk"].append(psutil.disk_partitions())
 
-def generate_graphs():
-    #print(system_stats)
-    # GPU
-    gpu_mem_used = []
-    for gpu_info in system_stats["gpu"]:
-        gpu_mem_used.append(gpu_info[0]["mem_used"])
-    s = pd.Series(gpu_mem_used)
-    fig, ax = plt.subplots()
-    s.plot.bar()
-    fig.savefig('images/%s_gpu_usage.png'%(machine_name))
-    plt.close()
-
-    # CPU
-    s = pd.Series(system_stats["cpu"])
-    fig, ax = plt.subplots()
-    s.plot.bar()
-    fig.savefig('images/%s_cpu_usage.png'%(machine_name))
-    plt.close()
-
-    # Memory
-    mem_used = []
-    for memory_info in system_stats["memory"]:
-        mem_used.append(memory_info.percent)
-    s = pd.Series(mem_used)
-    fig, ax = plt.subplots()
-    s.plot.bar()
-    fig.savefig('images/%s_memory_usage.png'%(machine_name))
-    plt.close()
-
-    # Sensors
-    try:
-        sensor_temp = []
-        for sensor_info in system_stats["sensor"]:
-            sensor_temp.append(sensor_info["coretemp"][0].current)
-        s = pd.Series(sensor_temp)
-        fig, ax = plt.subplots()
-        s.plot.bar()
-        fig.savefig('images/%s_sensor_temp.png'%(machine_name))
-        plt.close()
-    except:
-        print("Error")
-
 
 def generate_json(data_items):
     #print(system_stats)
@@ -72,7 +27,7 @@ def generate_json(data_items):
         filtered_stats[key] = system_stats[key][-data_items:]
 
     with open('%s/%s/%s.json'%(hydra.utils.get_original_cwd(), "images" ,machine_name), 'w') as f:
-        json.dump(system_stats, f)
+        json.dump(filtered_stats, f)
 
 
 @hydra.main(config_path="config/config.yaml")
